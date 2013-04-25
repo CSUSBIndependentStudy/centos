@@ -1,6 +1,7 @@
-centos
+Centos
 ======
 
 Notes on how to setup CentOS servers for various purposes.
 
-See [the wiki](https://github.com/csusbdt/centos/wiki/Home).
+Instructions assume that you set up a server using the instructions in BASE.md.
+
