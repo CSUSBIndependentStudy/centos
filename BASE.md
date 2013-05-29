@@ -4,7 +4,7 @@ This page provides steps to install CentOS Linux in preparation for installation
 
 These instructions were developed using the following ISO image.
 
-    CentOS-5.6-x86_64-bin-1of8
+    CentOS-6.4-x86_64-bin-DVD1.iso
 
 This image can be retrieved from the CentOS website.
 
@@ -13,23 +13,63 @@ I only needed the first ISO image in the distribution for two reasons:
 - I deselected the installation of all optional packages, and
 - The hardware drivers needed for my computer are present on the first image.
 
-If you install to a machine that requires a driver that is stored on one of the other images, you will be prompted to insert the disk for that image.
+If you install to a machine that requires a driver that is stored on 
+the other disk, you will be prompted to insert the disk for that image.
+(untested)
 
-These instructions minimize the amount of time you spend at the local console. By working from a remote console with a graphical browser, you can easily access these instructions and other resources during installation.
+These instructions minimize the amount of time you spend at the local console. 
+By working from a remote console with a graphical browser, 
+you can easily access these instructions and other resources during installation.
 
 ## Setup Bootable Hard Drive
 
 Obtain the installation CD mentioned above, insert into the CD drive and reboot.
 
-When presented with the prompt boot, enter _linux text_ to perform a text-based install.
+This boots to a menu with several options; do not select any of these options.
+Instead, press TAB to access a boot command line.
+Append _text_ to the given command as follows.
 
-When you arrive at the screen for package selection, deselect everything. Also, select _Customize Software Selection_ and deselect everything in there as well. (If you leave something selected, you may be prompted for one or more of the other CentOS installation CDs.)
+    vmlinuz initrd=initrd.img text
 
-Accept the default partitioning of the disk drive or customize to your liking.
+Press ENTER to submit the command.
+This will start a text mode install.
 
-Make sure you enter in the correct network parameters for your network interfaces.
+(I skipped the disc media test.)
+
+Complete the subsequent screens.
 
 When installation is complete, remove the CD from the drive and reboot.
+
+Log in as root, and do the following.
+
+    cd /etc/sysconfig/network-scripts/
+
+Use vi to edit _ifcfg-eth0_ (or _ifcfg-em1).
+For static IP address, set the following:
+
+    ONBOOT=yes
+    BOOTPROTO=static
+    IPADDR=<ip address>
+    NETMASK=<net mask>
+
+Edit edit _/etc/sysconfig/network_ as follows.
+
+    NETWORKING=yes
+    HOSTNAME=<dns path for ip address>
+    GATEWAY=<ip address of router>
+
+Start network.
+
+    service network start
+
+Edit _/etc/resolv.conf_
+
+    nameserver <ip address of dns server 1>
+    nameserver <ip address of dns server 2>
+
+
+== CONTINUE FROM HERE
+
 
 ## Configure security
 
