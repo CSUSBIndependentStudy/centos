@@ -67,6 +67,13 @@ Edit _/etc/resolv.conf_
     nameserver <ip address of dns server 1>
     nameserver <ip address of dns server 2>
 
+Test network by pinging the gateway.
+
+    ping <gateway ip address>
+
+Note: I needed to wait a long time for the ping to succeed.
+
+
 
 == CONTINUE FROM HERE
 
