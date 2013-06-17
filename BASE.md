@@ -78,24 +78,23 @@ In my case, __I needed to wait a long time for the ping to succeed__.
 
 __ THESE INSTRUCTIONS NEED REVISION FROM THIS POINT __
 
+## How to open a port
+
+Port 22 is open by default so you can access the system through ssh.
+
+Suppose you want to open port 5000.  The following will do this.
+
+    iptables -A INPUT -p tcp --dport 5000 -j ACCEPT
+    service iptables save
+    
+The first command opens the port; the second command saves the setting
+so that is persists between restarts of the service.
 
 ## Configure security
 
-Log in as root and install security packages.
-
-    yum install system-config-securitylevel
-
-Run the security configuration tool.
-
-    system-config-securitylevel-tui
-
-You should do three things when running this tool.
-
-- Select trusted network interfaces (eth0).
-- Disable SELinux.
-- Open the ssh port.
-
-If you leave SELinux enabled, some services may not function correctly unless you grant them permissions they need under the SELinux system, which I don't understand. I think it's a good idea to learn how to use SELinux and not disable it.
+I've had trouble in the past leaving SELinux enabled.
+It's better to learn how to control SELinux, but if you are like me and don't have time,
+may need to disable it.
 
 ## Continue from Remote Machine
 
