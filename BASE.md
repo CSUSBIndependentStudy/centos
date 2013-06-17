@@ -74,35 +74,15 @@ Test the configuration by pinging the gateway (router).
 The ping command will iterate on sending ping messages to the gateway.
 In my case, __I needed to wait a long time for the ping to succeed__.
 
-
-
-__ THESE INSTRUCTIONS NEED REVISION FROM THIS POINT __
-
-## How to open a port
-
-Port 22 is open by default so you can access the system through ssh.
-
-Suppose you want to open port 5000.  The following will do this.
-
-    iptables -A INPUT -p tcp --dport 5000 -j ACCEPT
-    service iptables save
-    
-The first command opens the port; the second command saves the setting
-so that is persists between restarts of the service.
-
-## Configure security
-
-I've had trouble in the past leaving SELinux enabled.
-It's better to learn how to control SELinux, but if you are like me and don't have time,
-may need to disable it.
-
 ## Continue from Remote Machine
 
-Logging in from a remote machine allows you to copy and paste from these notes as you continue the installation.
+Logging in from a remote machine allows you to copy and paste from these notes 
+as you continue the installation.
 
-Login remotely as root using ssh. If your remote machine is Linux, then connect to your server machine using the command version of ssh. For example, if the host name of your server is web0.ias.csusb.edu, then you would connect with the following command.
+Login remotely as root using ssh. If your remote machine is Linux, 
+then connect to your server machine using the command version of ssh. 
 
-    ssh root@web0.ias.csusb.edu
+    ssh root@<ip address of server>
 
 What to do if ssh fails with the following error?
 
@@ -110,7 +90,19 @@ What to do if ssh fails with the following error?
     @    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-You probably used ssh to connect to the host before. However, now that you are re-installing the operating system, this host has generated a new set of security credentials for ssh. Open the file _~/.ssh/known_hosts_ and delete the line that starts with the name of the host you are trying to connect to. In this example, that would be a line starting with web0.ias.csusb.edu.
+You probably used ssh to connect to this host at the ip address before.
+However, now that you are re-installing the operating system, 
+this host has generated a new set of security credentials for ssh. 
+Open the file _~/.ssh/known_hosts_ and delete the line 
+that starts with the address of the host you are trying to connect to. 
+
+__ THESE INSTRUCTIONS NEED REVISION FROM THIS POINT __
+
+## Configure security
+
+I've had trouble in the past leaving SELinux enabled.
+It's better to learn how to control SELinux, but if you are like me and don't have time,
+may need to disable it.
 
 ## Set up synchronization with a time server
 
