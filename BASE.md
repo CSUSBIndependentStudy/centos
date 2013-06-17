@@ -8,10 +8,9 @@ These instructions were developed using the following ISO image.
 
 This image can be retrieved from the CentOS website.
 
-I only needed the first ISO image in the distribution for two reasons:
-
-- I deselected the installation of all optional packages, and
-- The hardware drivers needed for my computer are present on the first image.
+I only needed the first ISO image in the distribution because 
+the hardware drivers needed for my computer are present on the first image
+and I did not install any optional software that may be on the second image.
 
 If you install to a machine that requires a driver that is stored on 
 the other disk, you will be prompted to insert the disk for that image.
@@ -27,7 +26,9 @@ Obtain the installation CD mentioned above, insert into the CD drive and reboot.
 
 This boots to a menu with several options; do not select any of these options.
 Instead, press TAB to access a boot command line.
-Append _text_ to the given command as follows.
+
+Append the word _text_ to the command provided in the command line to
+get the following.
 
     vmlinuz initrd=initrd.img text
 
@@ -40,11 +41,9 @@ Complete the subsequent screens.
 
 When installation is complete, remove the CD from the drive and reboot.
 
-Log in as root, and do the following.
+Log in as root.
 
-    cd /etc/sysconfig/network-scripts/
-
-Use vi to edit _ifcfg-eth0_ (or _ifcfg-em1).
+Use vi to edit _/etc/sysconfig/network-scripts/ifcfg-eth0_ (or _ifcfg-em1_).
 For static IP address, set the following:
 
     ONBOOT=yes
@@ -58,24 +57,26 @@ Edit edit _/etc/sysconfig/network_ as follows.
     HOSTNAME=<dns path for ip address>
     GATEWAY=<ip address of router>
 
-Start network.
+Start the network service.
 
     service network start
 
-Edit _/etc/resolv.conf_
+Edit _/etc/resolv.conf_ to set the ip address of 2 DNS servers.
+The syntax is as follows.  (Do not type the angle brackets.)
 
     nameserver <ip address of dns server 1>
     nameserver <ip address of dns server 2>
 
-Test network by pinging the gateway.
+Test the configuration by pinging the gateway (router).
 
     ping <gateway ip address>
 
-Note: I needed to wait a long time for the ping to succeed.
+The ping command will iterate on sending ping messages to the gateway.
+In my case, __I needed to wait a long time for the ping to succeed__.
 
 
 
-== CONTINUE FROM HERE
+__ THESE INSTRUCTIONS NEED REVISION FROM THIS POINT __
 
 
 ## Configure security
