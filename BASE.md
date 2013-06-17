@@ -96,30 +96,23 @@ this host has generated a new set of security credentials for ssh.
 Open the file _~/.ssh/known_hosts_ and delete the line 
 that starts with the address of the host you are trying to connect to. 
 
-__ THESE INSTRUCTIONS NEED REVISION FROM THIS POINT __
-
-## Configure security
-
-I've had trouble in the past leaving SELinux enabled.
-It's better to learn how to control SELinux, but if you are like me and don't have time,
-may need to disable it.
-
-## Set up synchronization with a time server
-
-Set the system time from a government time server, and then write the new time into the hardware clock.
-
-    yum install ntp
-    ntpdate north-america.pool.ntp.org
-    hwclock -w
-    chkconfig --level 345 ntpd on
-    service ntpd start
-
 ## Update Installed Packages
 
 Update the kernel and packages installed from CD, and then reboot.
 
     yum -y update
     shutdown -r now
+
+## Set up synchronization with a time server
+
+Set the system time from a government time server, 
+and then write the new time into the hardware clock.
+
+    yum install ntp
+    ntpdate north-america.pool.ntp.org
+    hwclock -w
+    chkconfig --level 345 ntpd on
+    service ntpd start
 
 ## Setup account for indirect root access
 
@@ -140,7 +133,8 @@ To create user turner who can become root, do the following.
     useradd -g wheel turner
     passwd turner
 
-For extra security, you can disable remote login by root. To do this, add the following line to _/etc/ssh/sshd_config_.
+For extra security, you can disable remote login by root. 
+To do this, add the following line to _/etc/ssh/sshd_config_.
 
     PermitRootLogin no
 
