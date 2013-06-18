@@ -17,10 +17,18 @@ Run the following as root to install required packages.
 Do the following as non-root.
 
     cd
-    git clone git://eagain.net/gitosis.git   THIS FAILED !!!!!!!!!!!
+    git clone https://github.com/tv42/gitosis.git
     cd gitosis
     sudo python setup.py install
 
+As root, do the following.
+
+    useradd git
+
+As the git user, do the following.
+
+    ssh-keygen -t rsa
+    # git gitosis-init < ~/.ssh/id_rsa.pub      THIS IS NOT CORRECT, I think.
 
 ## Create Repository
 
