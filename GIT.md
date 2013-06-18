@@ -25,10 +25,18 @@ As root, do the following.
 
     useradd git
 
+Next, initialize the admin repository (where user accounts are managed).
+
 As the git user, do the following.
 
     ssh-keygen -t rsa
-    # git gitosis-init < ~/.ssh/id_rsa.pub      THIS IS NOT CORRECT, I think.
+    sudo -H -u git gitosis-init < /home/git/.ssh/id_rsa.pub
+
+Add the following to the end of _/etc/ssh/sshd_config_.
+
+    Match User git
+    PasswordAuthentication no
+
 
 ## Create Repository
 
