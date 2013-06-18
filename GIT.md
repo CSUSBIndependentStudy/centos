@@ -5,11 +5,22 @@ __UNDER CONSTRUCTION__
 This page explains one way to set up a Git repository on a CentOS server. 
 This page assumes that you have set up the server using the instructions in BASE.md.
 
-## Install Required Packages
+I developed these instructions to help me create multiple separate remote git repositories
+for students of my courses to submit assignments.
 
-Run the following yum command to install various packages.
+## Instructions 
 
-    yum install ???
+Run the following as root to install required packages.
+
+    yum install git-core python-setuptools
+
+Do the following as non-root.
+
+    cd
+    git clone git://eagain.net/gitosis.git   THIS FAILED !!!!!!!!!!!
+    cd gitosis
+    sudo python setup.py install
+
 
 ## Create Repository
 
