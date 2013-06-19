@@ -1,36 +1,63 @@
 ## Overview
 
-__UNDER CONSTRUCTION__
+__UNDER SERIOUS CONSTRUCTION__
 
 This page explains one way to set up a Git repository on a CentOS server. 
 This page assumes that you have set up the server using the instructions in BASE.md.
+[Adam Weschler](https://github.com/aweschler) helped me develop these instructions.
 
-I developed these instructions to help me create multiple separate remote git repositories
-for students of my courses to submit assignments.
+I developed these instructions to help me create a large number of private 
+remote git repositories to support courses that I teach.
+In these courses, students submit work for grading by pushing into a private remote
+repository that I create for them.
+
+The approach presented here relies on gitosis, which is a free open source
+system that provides a mechanism to control user access to remote git repositories
+through public/private keys.
+Under gitosis, the files that configure access permissions are stored in a remote repository
+named _gitosis-admin_ on the server.  Changes to the gitosis configuration is accomplished
+by pushing revisions to these files from a client computer, which could be done from the
+server or another host.
+
+## Notes
+
+I will look at [gitolite](http://git-scm.com/book/en/Git-on-the-Server-Gitolite) next.
+
+[Here](http://stackoverflow.com/questions/2083807/using-git-shell-and-restricting-developers-to-commit-to-their-own-projects) is a simple approach to controlling user access.  I may try this.
+
+[Here](http://planzero.org/blog/2012/10/24/hosting_an_admin-friendly_git_server_with_git-shell) is a
+good article about a simple setup where all users have the same access privileges.
 
 ## Instructions 
+
+The following commands are to be executed on the server.
+
+Create a user named _git_, but don't set a password for the account.
+To do this, run the following as root.
+
+    useradd git
 
 Run the following as root to install required packages.
 
     yum install git-core python-setuptools
 
-Do the following as non-root.
+Assume the identity of git.
+
+    sudo su - git
+
+Do the following as a non-root user.
 
     cd
     git clone https://github.com/tv42/gitosis.git
     cd gitosis
     sudo python setup.py install
 
-As root, do the following.
-
-    useradd git
-
-Next, initialize the admin repository (where user accounts are managed).
+Initialize the admin repository (where user accounts are managed).
 
 As the git user, do the following.
 
     ssh-keygen -t rsa
-    sudo -H -u git gitosis-init < /home/git/.ssh/id_rsa.pub
+    gitosis-init < /home/git/.ssh/id_rsa.pub
 
 Add the following to the end of _/etc/ssh/sshd_config_.
 
