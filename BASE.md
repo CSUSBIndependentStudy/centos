@@ -22,10 +22,12 @@ you can easily access these instructions and other resources during installation
 
 ## Setup Bootable Hard Drive
 
-Obtain the installation CD mentioned above, insert into the CD drive and reboot.
+Obtain the installation DVD mentioned above, insert into the CD drive and reboot.
 
 This boots to a menu with several options; do not select any of these options.
-Instead, press TAB to access a boot command line.
+Instead, position the cursor over the first option 
+_Install or upgrade an existing system_ 
+and press TAB to _edit options.
 
 Append the word _text_ to the command provided in the command line to
 get the following.
@@ -39,7 +41,7 @@ This will start a text mode install.
 
 Complete the subsequent screens.
 
-When installation is complete, remove the CD from the drive and reboot.
+When installation is complete, remove the DVD from the drive and reboot.
 
 Log in as root.
 
