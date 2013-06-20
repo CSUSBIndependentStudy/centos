@@ -2,60 +2,55 @@
 
 __UNDER SERIOUS CONSTRUCTION__
 
-This page explains one way to set up a Git server to be used in courses.
-The process followed by the teacher is as follows:
+This page explains one way to set up a Git repository on a CentOS server. 
+This page assumes that you have set up the server using the instructions in BASE.md.
+[Adam Weschler](https://github.com/aweschler) helped me develop these instructions.
 
-- Students are given instructions to create ssh keys.  
-- Students email their public key files to the instructor.
-- The instructor renames each public key file to a name they can use to recognize the student.
-- The instructor creates a repository by the public key name and gives read/write access to the student and the instructor.
-- The instructor emails the url to the student to be used to clone the repository.
+I developed these instructions to help me create a large number of private 
+remote git repositories to support courses that I teach.
+In these courses, students submit work for grading by pushing into a private remote
+repository that I create for them.
 
-This page assumes that you have set up a server using the instructions in BASE.md.
+The approach presented here relies on gitosis, which is a free open source
+system that provides a mechanism to control user access to remote git repositories
+through public/private keys.
+Under gitosis, the files that configure access permissions are stored in a remote repository
+named _gitosis-admin_ on the server.  Changes to the gitosis configuration is accomplished
+by pushing revisions to these files from a client computer, which could be done from the
+server or another host.
 
-## Research Links
+## Notes
 
+I will look at [gitolite](http://git-scm.com/book/en/Git-on-the-Server-Gitolite) next.
 
-http://planzero.org/blog/2012/10/24/hosting_an_admin-friendly_git_server_with_git-shell
+[Here](http://stackoverflow.com/questions/2083807/using-git-shell-and-restricting-developers-to-commit-to-their-own-projects) is a simple approach to controlling user access.  I may try this.
 
-
-http://git-scm.com/book/en/Git-on-the-Server-Setting-Up-the-Server
-
-## Server set up
-
-    yum install git-core
-
-
-## Strategy
-
-Create an account for each student.  Suppose there are students Alice and Bob.
-
-Scenario: Alice sent alice.pub by email. Instructor's username is zed.
-
-useradd --skel /dev/null --shell /usr/bin/git-shell alice
-su alice
-mkdir .ssh
-cat alice.pub >> .ssh/authorized_keys
-cat zed.pub >> .ssh/authorized_keys
-
-mkdir 201.git
-cd 201.git
-git --bare init
-
-On alice's computer:
-
-git clone alice@ipaddress:201.git
-
-
-An alternative is to set the user password and send to user,
-however, I think the server must be configured to accept client cert.
-
-See http://planzero.org/blog/2012/10/24/hosting_an_admin-friendly_git_server_with_git-shell
+[Here](http://planzero.org/blog/2012/10/24/hosting_an_admin-friendly_git_server_with_git-shell) is a
+good article about a simple setup where all users have the same access privileges.
 
 ## Instructions 
 
+The following commands are to be executed on the server.
+
+Create a user named _git_, but don't set a password for the account.
+To do this, run the following as root.
+
+    useradd git
+
+Run the following as root to install required packages.
+
+    yum install git-core python-setuptools
+
+Assume the identity of git.
+
+    sudo su - git
 
 Do the following as a non-root user.
+
+    cd
+    git clone https://github.com/tv42/gitosis.git
+    cd gitosis
+    sudo python setup.py install
 
 Initialize the admin repository (where user accounts are managed).
 
