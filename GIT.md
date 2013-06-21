@@ -15,36 +15,50 @@ This page assumes that you have set up a server using the instructions in BASE.m
 
 ## Research Links
 
+- http://planzero.org/blog/2012/10/24/hosting_an_admin-friendly_git_server_with_git-shell
+- http://git-scm.com/book/en/Git-on-the-Server-Setting-Up-the-Server
 
-http://planzero.org/blog/2012/10/24/hosting_an_admin-friendly_git_server_with_git-shell
-
-
-http://git-scm.com/book/en/Git-on-the-Server-Setting-Up-the-Server
-
-## Server set up
+## Server Setup
 
     yum install git-core
 
+## Per Student Setup (not yet automated)
 
-## Strategy
+Suppose there is a student named Alice. 
 
-Create an account for each student.  Suppose there are students Alice and Bob.
+Suppose the instructor's username is zed.
 
-Scenario: Alice sent alice.pub by email. Instructor's username is zed.
+The instructor asks Alice to run the following command to generate 
+a public/private key pair for use with ssh.
 
-useradd --skel /dev/null --shell /usr/bin/git-shell alice
-su alice
-mkdir .ssh
-cat alice.pub >> .ssh/authorized_keys
-cat zed.pub >> .ssh/authorized_keys
+    ssh-keygen -t rsa
 
-mkdir 201.git
-cd 201.git
-git --bare init
+Alice emails the following file to the instructor.
 
-On alice's computer:
+    ~/.ssh/id_rsa.pub
 
-git clone alice@ipaddress:201.git
+The instructor renames the file to _alice.pub_.
+
+The instructor creates a linux account with id _alice_
+and configures the account for use with git only.
+
+    useradd --skel /dev/null --shell /usr/bin/git-shell alice
+    su alice
+    mkdir .ssh
+    cat alice.pub >> .ssh/authorized_keys
+    cat zed.pub >> .ssh/authorized_keys
+
+The instructor creates an empty repository for Alice to clone.
+(The course number is CSE 201, so I use _201_ as the name of the repository.)
+
+    mkdir 201.git
+    cd 201.git
+    git --bare init
+
+On alice's computer (assuming _server_ is the host name or ip address of the git server)
+do the following.
+
+   git clone alice@server:201.git
 
 
 An alternative is to set the user password and send to user,
