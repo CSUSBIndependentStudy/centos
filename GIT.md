@@ -1,7 +1,5 @@
 ## Overview
 
-__UNDER SERIOUS CONSTRUCTION__
-
 This page explains one way to set up a Git server to be used in courses.
 The process followed by the teacher is as follows:
 
@@ -20,29 +18,63 @@ This page assumes that you have set up a server using the instructions in BASE.m
 
 ## Server Setup
 
+Install git.
+
     yum install git-core
 
-Create skeleton files to be copied to new home directories of new accounts.
+Simplify git push command.
+
+    git config --global push.default current
+
+Get the instructor's public key; assume it is _zed.pub_.
+Assume that Zed is teaching a course numberd CSE 201,
+so we use the name _201_ as the name of the repository.
+
+Create skeleton files to be copied to home directories of new accounts.
 As root, do the following.
 
     cd
     mkdir skel
     cd skel
+    mkdir .ssh
+    cp zed.pub /root/skel/.ssh/authorized_keys
     mkdir 201.git
     cd 201.git
     git --bare init
-    cd ..
-    mkdir .ssh
+    cd
 
-Place a copy of the instructor's public key in the .ssh folder of the skeleton.
+Create a README file to convey information and so that student does not get a warning when cloning repo.
+As an example, create _README.md_ with the following contents.
 
-    cp zed.pub /root/skel/.ssh/authorized_keys
+````
+Welcome to CSE 201.
 
-## Per Student Setup (not yet automated)
+Run the following commands once to set the name and email that will be included in commits.
+(Use your real name so I can recognize you more easily.)
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+Run the following command to simplify the git push command.
+
+    git config --global push.default current 
+````
+
+Add the readme file to the repository.
+
+````
+cd
+git clone skel/201.git
+cd 201
+mv ../README.md .
+git add README.md
+git commit -m "Added readme file."
+git push 
+````
+
+## Per Student Setup
 
 Suppose there is a student named Alice. 
-
-Suppose the instructor's username is zed.
 
 The instructor asks Alice to run the following command to generate 
 a public/private key pair for use with ssh.
@@ -55,178 +87,72 @@ Alice emails the following file to the instructor.
 
 The instructor renames the file to _alice.pub_.
 
-The instructor creates a linux account with id _alice_
-and configures the account for use with git only.
+The instructor uses the following commands to create a linux account with id _alice_.
 
     useradd --skel /root/skel --shell /usr/bin/git-shell alice
-    su alice
-    mkdir .ssh
-    cat alice.pub >> .ssh/authorized_keys
-    cat zed.pub >> .ssh/authorized_keys
+    cat alice.pub >> /home/alice/.ssh/authorized_keys
 
-The instructor creates an empty repository for Alice to clone.
-(The course number is CSE 201, so I use _201_ as the name of the repository.)
+The first command creates account alice with no password and home directory populated with the
+skeleton that contains an empty repository named with the course name and pre-configured
+with the instructor's public key.
+The second command adds the student's public key.
 
-    mkdir 201.git
-    cd 201.git
-    git --bare init
+Here is a script that takes the account id as an argument that automates runs the above 2 commands.
 
-On alice's computer (assuming _server_ is the host name or ip address of the git server)
-do the following.
+````
+# Check for account id argument.
+if [ -z "$1" ]
+then
+  echo "ERROR: Account id not specified."
+  exit 1
+fi
+
+# If account already exists, print error message and terminate.
+if [ -d /home/$1 ]
+then
+  echo "ERROR: Account $1 already exists."
+  exit 1
+fi
+
+# If public key file doesn't exist, print error message and terminate.
+if [ ! -f $1.pub ];
+then
+   echo "ERROR: File $1.pub does not exist."
+  exit 1
+fi
+
+# Create account.
+useradd --create-home --skel /root/skel --shell /usr/bin/git-shell $1
+
+# Append public key to ssh authorized keys.
+cat $1.pub >> /home/$1/.ssh/authorized_keys
+````
+
+I placed the above script in _/root/create.sh_.
+
+I also created _/root/delete.sh_ to delete user accounts.  Here it is.
+
+````
+# Check for account id argument.
+if [ -z "$1" ]
+then
+  echo "ERROR: Account id not specified."
+  exit 1
+fi
+
+# If account already exists, print error message and terminate.
+if [ ! -d /home/$1 ]
+then
+  echo "ERROR: Account $1 doesn't exist."
+  exit 1
+fi
+
+# Delete account.
+userdel --remove $1
+````
+
+Assume the host name of the server is _server_.
+The instructor sends the student the following command to clone the repository.
 
    git clone alice@server:201.git
-
-
-An alternative is to set the user password and send to user,
-however, I think the server must be configured to accept client cert.
-
-See http://planzero.org/blog/2012/10/24/hosting_an_admin-friendly_git_server_with_git-shell
-
-
-
-## Automated Account Creation
-
-I use the following 2 Python scripts to help set up Subversion accounts for use in my courses.
-I would like to change these to setup Git accounts.
-
-### create_accounts.sh
-
-```
-#!/usr/bin/env python
-
-# This script is used to configure subversion repos
-# from a file of student account names and passwords.
-
-import subprocess
-
-# This script reads a file of comma-delimited usernames
-# and passwords, where each username/password pair is
-# in a line terminated by new line character.
-# The file should include a empty line at the end of
-# the file.
-
-infile_name = "accounts.csv"
-
-# The script creates repos in the following dir.
-svn_path_dir_name = "/home/turner/201/repos/"
-
-# The script appends to the auth user file and the auth group file.
-auth_user_file_name = "/home/turner/201/users"
-auth_group_file_name = "/home/turner/201/groups"
-teachers = "turner gwillis"
-
-# The script appends to the apache configuration file.
-conf_file_name = "/home/turner/201/201.conf"
-location_prefix = "/201/"
-
-# Open all files.
-
-infile = open(infile_name, 'r')
-conf_file = open(conf_file_name, 'a')
-auth_group_file = open(auth_group_file_name, 'a')
-
-# Read an initial line.
-
-line = infile.readline().strip(' \n')
-
-# Process each line.
-
-while len(line) > 0 :
-
-    # Extract name and password.
-    lst = line.split(',')
-    username = lst[0].strip(' ')
-    password = lst[1].strip(' ')
-    username = username.strip('"')
-    password = password.strip('"')
-
-    # Create repo.
-    svn_path_name = svn_path_dir_name + username
-    subprocess.call("mkdir " + svn_path_name, shell=True)
-    subprocess.call("svnadmin create " + svn_path_name, shell=True)
-    subprocess.call("chown -R apache:apache " + svn_path_name, shell=True)
-
-    # Add password to user file.
-    cmd = "htpasswd -b " + auth_user_file_name + " " + username + " " + password
-    subprocess.call(cmd, shell=True)
-
-    # Add to group file.
-    auth_group_file.write(username + ": " + username + " " + teachers + " \n")
-
-    # Append to configuration file.
-    conf_file.write("<location " + location_prefix + username + ">\n")
-    conf_file.write("    DAV svn\n");
-    conf_file.write("    SVNPath " + svn_path_name + "\n");
-    conf_file.write("    AuthType Basic\n");
-    conf_file.write("    AuthName \"repository\"\n");
-    conf_file.write("    AuthUserFile " + auth_user_file_name + "\n");
-    conf_file.write("    AuthGroupFile " + auth_group_file_name + "\n");
-    conf_file.write("    Require group " + username + "\n");
-    conf_file.write("</location>\n");
-    conf_file.write("\n");
-
-    # Get next line.
-    line = infile.readline().strip(' \n')
-
-infile.close()
-conf_file.close()
-auth_group_file.close()
-```
-
-### email_passwords.sh
-
-```
-#!/usr/bin/env python
-
-# This script is used to email student usernames and
-# passwords for access to their subversion repos.
-#
-# This script reads a file of comma-delimited usernames
-# passwords and email addresses.
-# Each line is terminated by new line character.
-# The file should include a empty line at the end of
-# the file. (Maybe blank line is not required.)
-
-import subprocess
-import smtplib
-
-# Set the following variables accordingly.
-SERVER = "mail.csusb.edu"
-FROM = "dturner@csusb.edu"
-SUBJECT = "Your CSE 201 Repository Account"
-INFILE = "accounts.csv"
-
-infile = open(INFILE, 'r')
-
-# Read an initial line.
-
-line = infile.readline().strip(' \n')
-
-# Process each line.
-
-# Process each line.
-
-while len(line) > 0 :
-
-    # Extract username, password and email.
-    lst = line.split(',')
-    username = lst[0].strip(' "')
-    password = lst[1].strip(' "')
-    recipient = lst[2].strip(' "')
-
-    # Create email.
-
-    body = "Username: " + username + "\nPassword: " + password
-    message = ("From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n%s"
-              %(FROM, recipient, SUBJECT, body))
-
-    server = smtplib.SMTP(SERVER)
-    server.sendmail(FROM, [recipient], message)
-    server.quit()
-
-    # Get next line.
-    line = infile.readline().strip(' \n')
-
-infile.close()
-```
 
