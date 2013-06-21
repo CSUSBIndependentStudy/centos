@@ -22,6 +22,22 @@ This page assumes that you have set up a server using the instructions in BASE.m
 
     yum install git-core
 
+Create skeleton files to be copied to new home directories of new accounts.
+As root, do the following.
+
+    cd
+    mkdir skel
+    cd skel
+    mkdir 201.git
+    cd 201.git
+    git --bare init
+    cd ..
+    mkdir .ssh
+
+Place a copy of the instructor's public key in the .ssh folder of the skeleton.
+
+    cp zed.pub /root/skel/.ssh/authorized_keys
+
 ## Per Student Setup (not yet automated)
 
 Suppose there is a student named Alice. 
@@ -42,7 +58,7 @@ The instructor renames the file to _alice.pub_.
 The instructor creates a linux account with id _alice_
 and configures the account for use with git only.
 
-    useradd --skel /dev/null --shell /usr/bin/git-shell alice
+    useradd --skel /root/skel --shell /usr/bin/git-shell alice
     su alice
     mkdir .ssh
     cat alice.pub >> .ssh/authorized_keys
@@ -66,41 +82,7 @@ however, I think the server must be configured to accept client cert.
 
 See http://planzero.org/blog/2012/10/24/hosting_an_admin-friendly_git_server_with_git-shell
 
-## Instructions 
 
-
-Do the following as a non-root user.
-
-Initialize the admin repository (where user accounts are managed).
-
-As the git user, do the following.
-
-    ssh-keygen -t rsa
-    gitosis-init < /home/git/.ssh/id_rsa.pub
-
-Add the following to the end of _/etc/ssh/sshd_config_.
-
-    Match User git
-    PasswordAuthentication no
-
-
-## Create Repository
-
-???
-
-## Configure ???
-
-Make sure ??? starts when system boots.
-
-    chkconfig ??? on
-
-All transactions will be through port ???. Run the following program to open this port:
-
-    system-config-securitylevel-tui
-
-## Other Instructions ...
-
-???
 
 ## Automated Account Creation
 

@@ -118,10 +118,6 @@ and then write the new time into the hardware clock.
 
 ## Setup account for indirect root access
 
-Install sudo to enable non-root users to become root.
-
-    yum install sudo
-
 To allow members of the wheel group to become root without entering a password, run visudo as follows.
 
     visudo
@@ -147,11 +143,4 @@ Restart sshd to make the change effective.
 To operate remotely as root, you must now login as a user in the wheel group, and then use sudo to become root as follows.
 
     sudo su -
-
-## Install tools (optional)
-
-Install locate to make it easy to find files. Run updatedb if file of interest was created after last running updatedb.
-
-    yum install mlocate
-    updatedb
 
