@@ -88,7 +88,15 @@ skeleton that contains an empty repository named with the course name and pre-co
 with the instructor's public key.
 The second command adds the student's public key.
 
-Here is a script that takes the account id as an argument that automates runs the above 2 commands.
+Assume the host name of the server is _server_.
+The instructor sends the student the following command to clone the repository.
+
+    git clone alice@server:201.git
+
+## Scripts
+
+Here is a script that creates a student account;
+it takes the desired account id as an argument.
 
 ````
 # Check for account id argument.
@@ -119,9 +127,8 @@ useradd --create-home --skel /root/skel --shell /usr/bin/git-shell $1
 cat $1.pub >> /home/$1/.ssh/authorized_keys
 ````
 
-I placed the above script in _/root/create.sh_.
-
-I also created _/root/delete.sh_ to delete user accounts.  Here it is.
+Here is a script that deletes student accounts;
+it takes the account id as an argument.
 
 ````
 # Check for account id argument.
@@ -141,9 +148,4 @@ fi
 # Delete account.
 userdel --remove $1
 ````
-
-Assume the host name of the server is _server_.
-The instructor sends the student the following command to clone the repository.
-
-   git clone alice@server:201.git
 
