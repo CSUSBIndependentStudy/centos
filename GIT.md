@@ -93,6 +93,9 @@ The instructor sends the student the following command to clone the repository.
 
     git clone alice@server:201.git
 
+The instructor uses the exactly the same command to clone Alice's repository
+(with the name _alice_ and NOT with the name _zed_).
+
 ## Scripts
 
 Here is a script that creates a student account;
