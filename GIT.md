@@ -11,11 +11,6 @@ The process followed by the teacher is as follows:
 
 This page assumes that you have set up a server using the instructions in BASE.md.
 
-## Research Links
-
-- http://planzero.org/blog/2012/10/24/hosting_an_admin-friendly_git_server_with_git-shell
-- http://git-scm.com/book/en/Git-on-the-Server-Setting-Up-the-Server
-
 ## Server Setup
 
 Install git.
@@ -49,15 +44,11 @@ As an example, create _README.md_ with the following contents.
 ````
 Welcome to CSE 201.
 
-Run the following commands once to set the name and email that will be included in commits.
+Run the following commands once to set your name and email.
 (Use your real name so I can recognize you more easily.)
 
     git config --global user.name "Your Name"
     git config --global user.email you@example.com
-
-Run the following command to simplify the git push command.
-
-    git config --global push.default current 
 ````
 
 Add the readme file to the repository.
