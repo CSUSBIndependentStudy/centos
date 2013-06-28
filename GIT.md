@@ -22,7 +22,7 @@ Simplify git push command.
     git config --global push.default current
 
 Get the instructor's public key; assume it is _zed.pub_.
-Assume that Zed is teaching a course numberd CSE 201,
+Assume that Zed is teaching a course numbered CSE 201,
 so we use the name _201_ as the name of the repository.
 
 Create skeleton files to be copied to home directories of new accounts.
@@ -150,5 +150,33 @@ fi
 
 # Delete account.
 userdel --remove $1
+````
+
+Here is a script that adds an additional public key for an account.
+
+````
+# Check for account id argument.
+if [ -z "$1" ]
+then  
+  echo "ERROR: Account id not specified."
+  exit 1
+fi
+
+# If account doesn't exist, print error message and terminate.
+if [ -d /home/$1 ]
+then  
+  echo "ERROR: Account $1 doesn't exist."
+  exit 1
+fi
+
+# If public key file doesn't exist, print error message and terminate.
+if [ ! -f $1.pub ];
+then
+   echo "ERROR: File $1.pub does not exist."
+  exit 1
+fi
+
+# Append public key to ssh authorized keys.
+cat $1.pub >> /home/$1/.ssh/authorized_keys
 ````
 
