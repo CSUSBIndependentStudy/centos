@@ -32,6 +32,7 @@ As root, do the following.
     mkdir skel
     cd skel
     mkdir .ssh
+    chmod 700 .ssh
     cp zed.pub /root/skel/.ssh/authorized_keys
     mkdir 201.git
     cd 201.git
