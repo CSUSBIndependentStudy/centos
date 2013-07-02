@@ -103,7 +103,7 @@ Here is a script that creates a student account;
 it takes the desired account id as an argument.
 
 ````
-# Check for account id argument.
+# If account name not specified on command line, print error message and terminate.
 if [ -z "$1" ]
 then
   echo "ERROR: Account id not specified."
@@ -135,7 +135,7 @@ Here is a script that deletes student accounts;
 it takes the account id as an argument.
 
 ````
-# Check for account id argument.
+# If account name not specified on command line, print error message and terminate.
 if [ -z "$1" ]
 then
   echo "ERROR: Account id not specified."
@@ -156,7 +156,7 @@ userdel --remove $1
 Here is a script that adds an additional public key for an account.
 
 ````
-# Check for account id argument.
+# If account name not specified on command line, print error message and terminate.
 if [ -z "$1" ]
 then  
   echo "ERROR: Account id not specified."
