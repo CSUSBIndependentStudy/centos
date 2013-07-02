@@ -9,7 +9,8 @@ The process followed by the teacher is as follows:
 - The instructor creates a repository by the public key name and gives read/write access to the student and the instructor.
 - The instructor emails the url to the student to be used to clone the repository.
 
-This page assumes that you have set up a server using the instructions in BASE.md.
+This page assumes that you have set up a server using the instructions in 
+[BASE.md](https://github.com/csusbdt/centos/blob/master/BASE.md).
 
 ## Server Setup
 
