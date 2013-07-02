@@ -40,6 +40,11 @@ As root, do the following.
     git --bare init
     cd
 
+If the instructor has a teaching assistant named Yed,
+then append Yed's public key to the list of authorized keys.
+
+    cat yed.pub >> /root/skel/.ssh/authorized_keys
+
 Create a README file to convey information and so that student does not get a warning when cloning repo.
 As an example, create _README.md_ with the following contents.
 
@@ -85,9 +90,11 @@ The instructor uses the following commands to create a linux account with id _al
     useradd --skel /root/skel --shell /usr/bin/git-shell alice
     cat alice.pub >> /home/alice/.ssh/authorized_keys
 
-The first command creates account alice with no password and home directory populated with the
-skeleton that contains an empty repository named with the course name and pre-configured
-with the instructor's public key.
+The first command creates account alice with a home directory populated with the
+skeleton that contains an empty repository and pre-configured
+with the public keys of the instructors.
+It also specifies git-shell as the login shell,
+so that students are restricted to git operations.
 The second command adds the student's public key.
 
 Assume the host name of the server is _server_.
