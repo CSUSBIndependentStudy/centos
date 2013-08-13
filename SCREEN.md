@@ -17,6 +17,7 @@ Likewise, to go to window 2, type _CTRL-a 2_.
 In general, screen commands are accessed by typing _CTRL-a_ followed by a keystroke. 
 The following gives a summary of screen commands for basic navigation.
 
+| keystrokes              | result                |
 |-------------------------|-----------------------|
 | CTRL-a c                | Create a new window   |
 | CTRL-a spacebar         | Go to next window     |
