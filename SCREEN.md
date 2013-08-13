@@ -33,6 +33,7 @@ Consequently, when you exit your login window, the session continues to run.
 When you re-login later, you re-attach the session to your new login window. 
 The following commands are relevant.
 
+| keystrokes    | result                                                |
 | ------------- | ----------------------------------------------------- |
 | screen -d -r 	| reattach a session, and if necessary, detach it first |
 | screen -d 	| detach session from terminal                          |
