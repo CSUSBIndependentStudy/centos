@@ -11,9 +11,6 @@ To navigate back to the first window, type _CTRL-a spacebar_.
 Type it again to return to the second window. 
 _CTRL-a spacebar_ pages through the open windows.
 
-To go to window 0, type _CTRL-a 0_. 
-Likewise, to go to window 2, type _CTRL-a 2_.
-
 In general, screen commands are accessed by typing _CTRL-a_ followed by a keystroke. 
 The following gives a summary of screen commands for basic navigation.
 
@@ -22,8 +19,6 @@ The following gives a summary of screen commands for basic navigation.
 | CTRL-a c                | Create a new window   |
 | CTRL-a spacebar         | Go to next window     |
 | CTRL-a backspace or del | Go to previous window |
-| CTRL-a 2                | Go to window 2        |
-| CTRL-a w                | list windows          |
 
 To exit a window, just exit from the shell in that window, and the window is killed.
 
@@ -35,8 +30,8 @@ The following commands are relevant.
 
 | keystrokes    | result                                                |
 | ------------- | ----------------------------------------------------- |
-| screen -d -r 	| reattach a session, and if necessary, detach it first |
-| screen -d 	| detach session from terminal                          |
+| screen -d r   | reattach a session, and if necessary, detach it first |
+| screen -d     | detach session from terminal                          |
 | screen -list 	| show status                                           |
 
 Sometimes your screen may appear to freeze. 
