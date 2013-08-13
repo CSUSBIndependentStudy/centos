@@ -17,6 +17,7 @@ Likewise, to go to window 2, type _CTRL-a 2_.
 In general, screen commands are accessed by typing _CTRL-a_ followed by a keystroke. 
 The following gives a summary of screen commands for basic navigation.
 
+| ----------------------- | --------------------- |
 | CTRL-a c                | Create a new window   |
 | CTRL-a spacebar         | Go to next window     |
 | CTRL-a backspace or del | Go to previous window |
@@ -31,6 +32,7 @@ Consequently, when you exit your login window, the session continues to run.
 When you re-login later, you re-attach the session to your new login window. 
 The following commands are relevant.
 
+| ------------- | ----------------------------------------------------- |
 | screen -d -r 	| reattach a session, and if necessary, detach it first |
 | screen -d 	| detach session from terminal                          |
 | screen -list 	| show status                                           |
