@@ -163,7 +163,8 @@ fi
 userdel --remove $1
 ````
 
-Here is a script that adds an additional public key for an account.
+Here is a script that adds an additional public key for an account;
+it takes the account id as an argument.
 
 ````
 # append.sh
