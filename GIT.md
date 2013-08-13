@@ -111,6 +111,7 @@ Here is a script that creates a student account;
 it takes the desired account id as an argument.
 
 ````
+# create.sh
 # If account name not specified on command line, print error message and terminate.
 if [ -z "$1" ]
 then
@@ -143,6 +144,7 @@ Here is a script that deletes student accounts;
 it takes the account id as an argument.
 
 ````
+# delete.sh
 # If account name not specified on command line, print error message and terminate.
 if [ -z "$1" ]
 then
@@ -164,6 +166,7 @@ userdel --remove $1
 Here is a script that adds an additional public key for an account.
 
 ````
+# append.sh
 # If account name not specified on command line, print error message and terminate.
 if [ -z "$1" ]
 then  
