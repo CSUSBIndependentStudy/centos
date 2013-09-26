@@ -7,13 +7,12 @@ In order for your instructor to set up a private remote repository for you,
 you need to send to your instructor the public key that your Git client
 program uses when connecting to remote hosts.
 After you send this, your instructor will create an empty
-remote repository for you to push commits into.
+remote repository for you to clone.
 
-Your instructor will also send you a username that you can use to
+Your instructor will also send you a username to
 connect to this repository.
 After you receive the username, you will be able
-to clone the remote repository and use this to
-track changes to the source code you develop and submit your work.
+to clone the remote repository and use this to submit your work.
 
 The command you will use to clone your repository will
 look something like the following, with _username_
@@ -25,7 +24,8 @@ Each time you complete an assignment,
 you should commit your work into a local repository
 and then push changes to the remote repository.
 
-Also, you can push changes to your source code that is incomplete.
+You can also push changes to your source code at any point
+prior to completion of your work.
 This lets your remote repository serve as a backup
 of your work.  It also allows you to easily work from
 multiple computers by synchronizing your local repositories with
@@ -36,34 +36,30 @@ your remote repository.
 Email is not completely private.
 There are a number of different actors who can read
 emails, including employees of the companies that
-provide email service to the sender and receiver,
-workers who are part of government surveillance activities
-and any criminals who may have compromized systems of one of the
-email service providers.
+provide email service to the sender and receiver.
 
 With this in mind,
 it's safer to email public keys than passwords.
-If someone gets your password, they can
-authenticate as you;
+If someone gets your password, they can authenticate as you;
 if they get your public key, they can not.
 
 However, one danger with sending public keys by email
 is that an imposter
 can send the recipient their own public key.
 To mitigate this threat,
-we will accept only a single public key for each repository.
-Consequently, if you want to access your repository from
-multiple computers,
-you need to copy your public-private key pair
-to all these computers.
-See the section _Multiple computers_ below
-to see how to do this.
+your instructor may only accept a single public key for each repository.
+Consequently, if you want to access your repository from multiple computers,
+you need to copy your public-private key pair to all these computers.
+See the section _Multiple computers_ below to see how to do this.
 
 ## Setup instructions
 
 ### Verify that Git is installed
 
-Open a terminal window and enter the command _git_.
+Open a terminal window and enter the following command.
+
+    git
+
 If your system reports that the command is not found,
 then visit [the Git website](http://git-scm.com/) to download and install Git.
 
@@ -76,42 +72,43 @@ of your home directory including the hidden files and folders.
 
     ls -a ~
 
-The ls command lists the contents of a folder (also called a directory).
-The -a argument means list all the contents, including the hidden
+The _ls_ command lists the contents of a folder (also called a directory).
+The _-a_ argument means list all the contents, including the hidden
 files and folders.  The tilda character '~' refers to your home folder.
 
-Under Windows, you can open the the Git Bash program
-and run the commands given above for OS X and Limux.
-alternatively, the following command will show the contents of your home folder.
+Under Windows, you can start the Git Bash program
+and run commands similar to OS X and Limux.
+Alternatively, the following command will show the contents of your home folder.
 
     dir %HOME%
 
 If you want to use the Windows file viewer (Windows Explorer),
 you need to configure it to show hidden files and folders
 if you want to look for the .ssh folder using this tool.
+Use the tool's menu to do this.
 
 If you do not find a .ssh folder, then run the following command
 to generate a public-private key pair, which will also create the
 .ssh folder to contain them.
-This comand will prompt you for a passphrase -- do NOT enter a passphrase,
+This comand will prompt you for a passphrase but __do NOT enter a passphrase__,
 just press enter when asked for one (which it does several times).
-Also, accept the default file name and location.
-Replace "Your name" with your name.
+Also, accept the default file name and location, and
+replace "Your name" with your name.
 
     ssh-keygen -t rsa -C "Your name"
 
-After running this command, verify that the .ssh folder exists and
+After running this command, verify that the .ssh folder was created and
 contains your private and public keys.
-Your private key is stored in the following location.
-
-    ~/.ssh/id_rsa
-
 Your public key is stored in the following location.
 
     ~/.ssh/id_rsa.pub
 
-You should keep you private key secret but you can distribute your
-public key.  Other systems will use your public key to create a
+Your private key is stored in the following location.
+
+    ~/.ssh/id_rsa
+
+You can distribute your public key, but keep your private key secret.
+Other systems will use your public key to create a
 cryptographic challenge that only the holder of the private key can solve.
 This is called asymmetric key encryption and is the foundation for most
 of the secure communication on the Internet.
@@ -177,14 +174,14 @@ To avoid synchronization problems, adhere to the following 2 rules.
 
 In addition to setting up Git on your system,
 you will also need to learn how to use it.
-While you are waiting for me to create your repository,
+While you are waiting for your instructor to create your repository,
 you should complete the
 [TryGit](http://try.github.io/levels/1/challenges/1) tutorial.
 After this, familiarize yourself with
 [the documentation for Git](http://git-scm.com/doc)
 and [the Git book](http://git-scm.com/book).
-I recommend that you read a few chapters of the
-Git book and then carefully read 
+After reading a few chapters of the Git book, carefully read 
 [Chapter 9 on Git Internals](http://git-scm.com/book/en/Git-Internals).
 The Git Internals chapter provides essential concepts
-and details needed to understand Git.
+and details needed to fully understand Git.
+
