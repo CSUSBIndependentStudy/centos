@@ -12,6 +12,10 @@ The process followed by the teacher is as follows:
 This page assumes that you have set up a server using the instructions in 
 [BASE.md](https://github.com/csusbdt/centos/blob/master/BASE.md).
 
+After you follow these instructions to set up your system,
+you can provide students a link to
+[the student instructions](https://github.com/csusbdt/centos/blob/master/GIT-SUBMISSION.md).
+
 ## Server Setup
 
 Install git.
