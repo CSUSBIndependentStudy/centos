@@ -170,6 +170,20 @@ To avoid synchronization problems, adhere to the following 2 rules.
 - When you start a work sesion, pull from your remote repository.
 - When you end a work session, push to your remote repository.
 
+## Configure Git with your name and email
+
+Before committing your work to your remote repository,
+run the following commands to set your name and email.
+Use your real name so your instructor can recognize you more easily.
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+Run these commands immediately;
+you do not need to wait for your remote repository to be created.
+
+You only need to do the above once (for each computer you work on).
+
 ## Learn Git
 
 In addition to setting up Git on your system,
