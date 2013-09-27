@@ -80,7 +80,7 @@ Under Windows, you can start the Git Bash program
 and run commands similar to OS X and Limux.
 Alternatively, the following command will show the contents of your home folder.
 
-    dir %HOME%
+    dir %HOMEPATH%
 
 If you want to use the Windows file viewer (Windows Explorer),
 you need to configure it to show hidden files and folders
