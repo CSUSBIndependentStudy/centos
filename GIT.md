@@ -168,32 +168,40 @@ userdel --remove $1
 ````
 
 Here is a script that adds an additional public key for an account;
-it takes the account id as an argument.
+it takes the account id and name of new public key (minus the .pub extension)
+for arguments.
 
 ````
 # append.sh
-# If account name not specified on command line, print error message and terminate.
+# Check for account id argument.
 if [ -z "$1" ]
-then  
+then
   echo "ERROR: Account id not specified."
   exit 1
 fi
 
+# Check for account id argument.
+if [ -z "$2" ]
+then
+  echo "ERROR: Public key not specified."
+  exit 1
+fi
+
 # If account doesn't exist, print error message and terminate.
-if [ -d /home/$1 ]
-then  
+if [ ! -d /home/$1 ]
+then
   echo "ERROR: Account $1 doesn't exist."
   exit 1
 fi
 
 # If public key file doesn't exist, print error message and terminate.
-if [ ! -f $1.pub ];
+if [ ! -f $2.pub ];
 then
-   echo "ERROR: File $1.pub does not exist."
+   echo "ERROR: File $2.pub does not exist."
   exit 1
 fi
 
 # Append public key to ssh authorized keys.
-cat $1.pub >> /home/$1/.ssh/authorized_keys
+cat $2.pub >> /home/$1/.ssh/authorized_keys
 ````
 
