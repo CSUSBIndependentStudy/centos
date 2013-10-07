@@ -117,7 +117,7 @@ If you do have a .ssh folder, but it does not contain file id_rsa.pub,
 then you should run the ssh-keygen command given above to generate
 a public-private key pair.
 
-### If you working under Linux ...
+### If you are working under Linux ...
 
 If you are working under Linux, then run
 _ssh-add_ to load your keys into the SSH agent.
