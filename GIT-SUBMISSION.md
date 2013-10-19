@@ -48,9 +48,13 @@ is that an imposter
 can send the recipient their own public key.
 To mitigate this threat,
 your instructor may only accept a single public key for each repository.
-Consequently, if you want to access your repository from multiple computers,
-you need to copy your public-private key pair to all these computers.
-See the section _Multiple computers_ below to see how to do this.
+Consequently, you will need to securely deliver to the instructor
+any keys for additional computers you work from.
+An alternative is to copy your public-private key pair to all additional computers,
+but this approach makes it easier for an attacker to compromise all your systems
+if they were to compromise one.
+The section _Multiple computers_ below explains how to copy your ssh keys
+from one computer to another.
 
 ## Setup instructions
 
@@ -90,9 +94,9 @@ Use the tool's menu to do this.
 If you do not find a .ssh folder, then run the following command
 to generate a public-private key pair, which will also create the
 .ssh folder to contain them.
-This comand will prompt you for a passphrase but __do NOT enter a passphrase__,
+__Do NOT enter a passphrase_ for this command;
 just press enter when asked for one (which it does several times).
-Also, accept the default file name and location, and
+Also, _accept the default file name and location_, and
 replace "Your name" with your name.
 
     ssh-keygen -t rsa -C "Your name"
