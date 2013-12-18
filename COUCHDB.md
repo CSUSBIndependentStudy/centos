@@ -5,9 +5,14 @@ yum install wget
 wget ftp://mirror.cs.princeton.edu/pub/mirrors/fedora-epel/6/i386/epel-release-6-8.noarch.rpm
 rpm -ivh epel-release-6-8.noarch.rpm
 yum install couchdb
+chkconfig --add couchdb
+chkconfig couchdb on
 ~~~
 
-Edit _/etc/couchdb/local.ini_ and set the bind address.
+Edit _/etc/couchdb/local.ini_ and do the following.
+
+- Set bind_address to the ip address clients will use to reach the server.
+- In the [admins] section, add an admin user.
 
 Configure iptables to restrict connections to a given range of ip addresses.
 
