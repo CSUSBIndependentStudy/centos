@@ -14,17 +14,15 @@ Edit _/etc/couchdb/local.ini_ and do the following.
 - Set bind_address to the ip address clients will use to reach the server.
 - In the [admins] section, add an admin user.
 
-Configure iptables to restrict connections to a given range of ip addresses.
+If you want to restrict connections to a given range of
+IP addresses, then add a version of the following command 
+to _/etc/sysconfig/iptables_ just after the similar command
+that opens port 22.
+I think I did the following to make this change persist across restarts,
+but I'm not sure.
 
 ~~~
-iptables -A INPUT -p tcp -m iprange --src-range 139.182.148.49-139.182.148.154 --dport 5984 -j ACCEPT
 service iptables save
-~~~
-
-Note: I had to edit the order of commands in the folowing file to get this to work:
-
-~~~
-  /etc/sysconfig/iptables
 ~~~
 
 Reboot the system or run the following.
