@@ -21,6 +21,12 @@ iptables -A INPUT -p tcp -m iprange --src-range 139.182.148.49-139.182.148.154 -
 service iptables save
 ~~~
 
+Note: I had to edit the order of commands in the folowing file to get this to work:
+
+~~~
+  /etc/sysconfig/iptables
+~~~
+
 Reboot the system or run the following.
 
    service couchdb start
