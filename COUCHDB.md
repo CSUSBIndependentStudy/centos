@@ -1,4 +1,4 @@
-Warning: the following process fails to download software securely.
+Warning: the following process does not download software securely.
 
 ~~~
 yum install wget
