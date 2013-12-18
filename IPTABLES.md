@@ -15,4 +15,4 @@ current state of iptables to be reloaded when the system restarts.
 To accept connections to port 5984 from a limited range of IP addresses,
 use the following.
 
-    -A INPUT -p tcp -m iprange --src-range 139.182.148.49-139.182.148.154 --dport 5984 -j ACCEPT
+    iptables -A INPUT -p tcp -m iprange --src-range 139.182.148.49-139.182.148.154 --dport 5984 -j ACCEPT
