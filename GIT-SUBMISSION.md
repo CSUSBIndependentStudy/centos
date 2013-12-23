@@ -94,7 +94,7 @@ Use the tool's menu to do this.
 If you do not find a .ssh folder, then run the following command
 to generate a public-private key pair, which will also create the
 .ssh folder to contain them.
-__Do NOT enter a passphrase_ for this command;
+__Do NOT enter a passphrase__ for this command;
 just press enter when asked for one (which it does several times).
 Also, _accept the default file name and location_, and
 replace "Your name" with your name.
