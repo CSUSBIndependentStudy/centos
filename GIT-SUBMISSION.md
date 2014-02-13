@@ -101,11 +101,12 @@ replace "Your name" with your name.
 
     ssh-keygen -t rsa -C "Your name"
 
-After running this command, verify that the .ssh folder was created and
-contains your private and public keys.
-Your public key is stored in the following location.
+After running this command, a folder named <em>.ssh</em> should exist
+and contain public and private key files.
+You can display the contents of the public key file with the <em>cat</em> command
+as follows.
 
-    ~/.ssh/id_rsa.pub
+    cat ~/.ssh/id_rsa.pub
 
 Your private key is stored in the following location.
 
