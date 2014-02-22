@@ -30,5 +30,5 @@ Restart iptables.
 
 Reboot the system or run the following.
 
-   service couchdb start
+    service couchdb start
 
