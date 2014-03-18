@@ -4,7 +4,7 @@ This page provides steps to install CentOS Linux in preparation for installation
 
 These instructions were developed using the following ISO image.
 
-    CentOS-6.4-x86_64-bin-DVD1.iso
+    CentOS-6.5-x86_64-bin-DVD1.iso
 
 This image can be retrieved from the CentOS website.
 
@@ -143,4 +143,16 @@ Restart sshd to make the change effective.
 To operate remotely as root, you must now login as a user in the wheel group, and then use sudo to become root as follows.
 
     sudo su -
+
+## Automatic Login
+
+Do the following to enable automatic login through ssh without having to
+enter a password.  Accept all defaults for ssh-keygen.
+
+    yum install openssh-clients
+    ssh-keygen -t rsa -C "Your name"
+    ssh-add
+
+Copy the contents of ~/.ssh/id_rsa.pub from the connecting host and
+add to the contents of ~/.ssh/authorized_keys on the server.
 
