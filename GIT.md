@@ -27,8 +27,6 @@ Simplify git push command.
     git config --global push.default current
 
 Get the instructor's public key; assume it is _zed.pub_.
-Assume that Zed is teaching a course numbered CSE 201,
-so we use the name _201_ as the name of the repository.
 
 Create skeleton files to be copied to home directories of new accounts.
 As root, do the following.
@@ -39,8 +37,8 @@ As root, do the following.
     mkdir .ssh
     chmod 700 .ssh
     cp zed.pub /root/skel/.ssh/authorized_keys
-    mkdir 201.git
-    cd 201.git
+    mkdir repo.git
+    cd repo.git
     git --bare init
     cd
 
@@ -53,8 +51,6 @@ Create a README file to convey information and so that student does not get a wa
 As an example, create _README.md_ with the following contents.
 
 ````
-Welcome to CSE 201.
-
 Run the following commands once to set your name and email.
 (Use your real name so I can recognize you more easily.)
 
@@ -66,8 +62,8 @@ Add the readme file to the repository.
 
 ````
 cd
-git clone skel/201.git
-cd 201
+git clone skel/repo.git
+cd repo
 mv ../README.md .
 git add README.md
 git commit -m "Added readme file."
@@ -104,7 +100,7 @@ The second command adds the student's public key.
 Assume the host name of the server is _server_.
 The instructor sends the student the following command to clone the repository.
 
-    git clone alice@server:201.git
+    git clone alice@server:repo.git
 
 The instructor uses the exactly the same command to clone Alice's repository
 (with the name _alice_ and NOT with the name _zed_).
@@ -143,6 +139,8 @@ useradd --create-home --skel /root/skel --shell /usr/bin/git-shell $1
 # Append public key to ssh authorized keys.
 cat $1.pub >> /home/$1/.ssh/authorized_keys
 ````
+
+I have not found the remaining script to be useful.
 
 Here is a script that deletes student accounts;
 it takes the account id as an argument.
