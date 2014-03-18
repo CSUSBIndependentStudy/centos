@@ -58,6 +58,15 @@ from one computer to another.
 
 ## Setup instructions
 
+### Turn Off Source Control in Xcode
+
+If you are using Xcode, do the following to disable source control.
+
+- Open Xcode
+- From the menu, select Xcode ... Preferences ...
+- Select the Source Control tab.
+- Make sure Enable Source Control is unchecked.
+
 ### Verify that Git is installed
 
 Open a terminal window and enter the following command.
