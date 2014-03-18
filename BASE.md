@@ -103,7 +103,7 @@ that starts with the address of the host you are trying to connect to.
 Update the kernel and packages installed from CD, and then reboot.
 
     yum -y update
-    shutdown -r now
+    reboot
 
 ## Set up synchronization with a time server
 
