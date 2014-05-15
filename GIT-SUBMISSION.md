@@ -76,6 +76,10 @@ Open a terminal window and enter the following command.
 If your system reports that the command is not found,
 then visit [the Git website](http://git-scm.com/) to download and install Git.
 
+__IMPORTANT: if you are working under Windows, then you should run 
+the command described in this document using the Git Bash shell
+and not the command prompt window that is built into Windows.__
+
 ### Find or generate an SSH public-private key pair
 
 Look in your home folder for a hidden folder named _.ssh._
@@ -90,15 +94,7 @@ The _-a_ argument means list all the contents, including the hidden
 files and folders.  The tilda character '~' refers to your home folder.
 
 Under Windows, you can start the Git Bash program
-and run commands similar to OS X and Limux.
-Alternatively, the following command will show the contents of your home folder.
-
-    dir %HOMEPATH%
-
-If you want to use the Windows file viewer (Windows Explorer),
-you need to configure it to show hidden files and folders
-if you want to look for the .ssh folder using this tool.
-Use the tool's menu to do this.
+and run commands similar to OS X and Linux.
 
 If you do not find a .ssh folder, then run the following command
 to generate a public-private key pair, which will also create the
@@ -172,15 +168,8 @@ ssh-add to load your keys into the SSH agent.
 ### Multiple computers
 
 If you want to interact with git from more than one machine,
-you need to make sure that the private and public key files 
-are the same across all the computers.
-The private and public key files are contained in the following
-files, respectively.
-Both of these files contain character data,
-so you can easily access and manipulate their contents.
-
-- ~/.ssh/id_rsa
-- ~/.ssh/id_rsa.pub
+you need to give your instructor the public key for each computer
+you plan to work from.
 
 If you use multiple computers to complete work in this course,
 remember to start a work session by pulling changes from the
