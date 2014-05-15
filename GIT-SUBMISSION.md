@@ -31,31 +31,6 @@ of your work.  It also allows you to easily work from
 multiple computers by synchronizing your local repositories with
 your remote repository.
 
-## Security
-
-Email is not completely private.
-There are a number of different actors who can read
-emails, including employees of the companies that
-provide email service to the sender and receiver.
-
-With this in mind,
-it's safer to email public keys than passwords.
-If someone gets your password, they can authenticate as you;
-if they get your public key, they can not.
-
-However, one danger with sending public keys by email
-is that an imposter
-can send the recipient their own public key.
-To mitigate this threat,
-your instructor may only accept a single public key for each repository.
-Consequently, you will need to securely deliver to the instructor
-any keys for additional computers you work from.
-An alternative is to copy your public-private key pair to all additional computers,
-but this approach makes it easier for an attacker to compromise all your systems
-if they were to compromise one.
-The section _Multiple computers_ below explains how to copy your ssh keys
-from one computer to another.
-
 ## Setup instructions
 
 ### Turn Off Source Control in Xcode
@@ -67,18 +42,20 @@ If you are using Xcode, do the following to disable source control.
 - Select the Source Control tab.
 - Make sure Enable Source Control is unchecked.
 
-### Verify that Git is installed
+### Install Git
 
-Open a terminal window and enter the following command.
+The lab computers already have git installed
+so there is nothing to install
+(but you will need to configure as explained below.
 
-    git
-
-If your system reports that the command is not found,
-then visit [the Git website](http://git-scm.com/) to download and install Git.
+To install Git on Mac OS X and Windows, dowload the Git installer
+from [the Git website](http://git-scm.com/) and install.
 
 __IMPORTANT: if you are working under Windows, then you should run 
-the command described in this document using the Git Bash shell
-and not the command prompt window that is built into Windows.__
+the commands described in this document using the Git Bash shell
+and not the command prompt that is built into Windows.__
+
+Under OS X and Linux, you should run git commands in a normal terminal window.
 
 ### Find or generate an SSH public-private key pair
 
@@ -92,9 +69,6 @@ of your home directory including the hidden files and folders.
 The _ls_ command lists the contents of a folder (also called a directory).
 The _-a_ argument means list all the contents, including the hidden
 files and folders.  The tilda character '~' refers to your home folder.
-
-Under Windows, you can start the Git Bash program
-and run commands similar to OS X and Linux.
 
 If you do not find a .ssh folder, then run the following command
 to generate a public-private key pair, which will also create the
